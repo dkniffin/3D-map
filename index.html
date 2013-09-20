@@ -1,0 +1,40 @@
+<html>
+<head>
+	<style>
+		canvas { 
+			width: 100%; 
+			height: 100%;
+			background-color: black;
+		}
+	</style>
+	<script src="lib/js/jquery-1.9.1.min.js"></script>
+	<script src="lib/js/three.min.js"></script>
+	
+	<script src="lib/js/firstPersonControls.js"></script>
+	<script src="lib/js/OrbitControls.js"></script>
+	<script src="lib/js/improvedNoise.js"></script>
+
+	<script src="lib/js/main.js"></script>
+
+	
+
+
+</head>
+<body>
+<div id="mapContainer"><br /><br /><br /><br /><br />Generating world...</div>
+
+<script>
+	//$.post('lib/ajax/topoData.php', function(data) {
+	console.log('here');
+	$.getJSON('data/srtm-boulder.json', function(data) {
+		populateSRTMData(data);
+		console.log('b4 init');
+
+		init();
+		console.log('after init');
+		//animate();
+	});
+</script>
+
+</body>
+</html>

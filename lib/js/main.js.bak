@@ -1,0 +1,186 @@
+var container;
+var camera, controls, scene, renderer;
+var mesh, texture;
+
+var SRTMData;
+
+/*
+var worldWidth = 256, worldDepth = 256,
+worldHalfWidth = worldWidth / 2, worldHalfDepth = worldDepth / 2;
+*/
+
+var worldWidth, worldDepth, 
+worldHalfWidth, worldHalfDepth;
+
+var clock = new THREE.Clock();
+
+function init(){
+	container = document.getElementById('mapContainer');
+
+	// Create the scene
+	scene = new THREE.Scene();
+
+	// Create the camera
+	camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 0.1, 20000 );
+
+	// Set up controls
+
+	// Orbit controls
+	//controls = new THREE.OrbitControls( camera );
+	//controls.addEventListener( 'change', render);
+	controls = new THREE.FirstPersonControls(camera);
+	controls.movementSpeed = 70;
+	controls.lookSpeed = 0.75;
+	controls.noFly = true;
+
+	// Generate a PlaneGeometry object with the data generated above
+	
+	//var geometry = new THREE.PlaneGeometry( 7500, 7500, worldWidth - 1, worldDepth - 1 );
+	//geometry.applyMatrix( new THREE.Matrix4().makeRotationX( - Math.PI / 2 ) );
+	
+	var geometry = new THREE.Geometry();
+
+	populateDataIntoGeometry(SRTMData, geometry, 0.001);
+
+	//geometry.vertices.push( new THREE.Vector3( -10,  10, 0 ) );
+	//geometry.vertices.push( new THREE.Vector3( -10, -10, 0 ) );
+	//geometry.vertices.push( new THREE.Vector3(  10, -10, 0 ) );
+
+	geometry.computeBoundingSphere();
+	
+	console.log(geometry);
+
+	// Position the camera
+	var mid = dataMiddle(SRTMData);
+	camera.position.x = 40.0179*111000;
+	camera.position.y = -105.146*85000;
+	camera.position.z = 2500;
+
+	console.log(mid);
+	camera.lookAt(mid);
+	camera.updateProjectionMatrix();
+
+	console.log(camera);
+
+	// Create a texture
+	//texture = new THREE.Texture( generateTexture( data, worldWidth, worldDepth ), new THREE.UVMapping(), THREE.ClampToEdgeWrapping, THREE.ClampToEdgeWrapping );
+	texture = new THREE.ImageUtils.loadTexture('lib/textures/seamless-dirt.jpg'),
+	texture.needsUpdate = true;
+
+	// Create a mesh out of the geometry and the texture
+	//mesh = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial( { map: texture } ) );
+	//mesh = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial({color:0x00ff00}));
+
+	var material = new THREE.ParticleBasicMaterial( {size: 10, vertexColors: true});
+	var particleSystem = new THREE.ParticleSystem( geometry, material)
+	scene.add(particleSystem);
+	//scene.add( mesh );
+
+	// Initialize the Renderer
+	renderer = new THREE.WebGLRenderer();
+	//renderer = new THREE.CanvasRenderer();
+	renderer.setSize( window.innerWidth, window.innerHeight );
+
+	// Empty the rendering container
+	container.innerHTML = "";
+
+	// Append the renderer to the container
+	container.appendChild( renderer.domElement );
+
+	// Set up a window resize listener
+	//window.addEventListener( 'resize', onWindowResize, false );
+}
+
+function populateDataIntoGeometry(inData, geometry, precision) {
+	for (var key in inData['nodes']) {
+		geometry.vertices.push( 
+			new THREE.Vector3( 
+				inData['nodes'][key]['lat']*111000, // Convert to meters 
+				inData['nodes'][key]['lon']*85000, // Convert to meters TODO: Fix this...
+				inData['nodes'][key]['ele']
+			)
+		);
+	}
+	//generateFaces(geometry);
+	console.log(geometry);
+}
+
+function generateFaces(geometry) {
+
+}
+
+function populateDataIntoGeometryOld(inData, geometry, precision) {
+	// The precision defines how precise the data should be 
+	// (ie: the distance between "height points"). 
+
+	var decPlaces = precision.toFixed(15).toString().replace(/0*$/, '').split('.')[1].length;
+	console.log(decPlaces);
+	console.log(precision);
+
+	/* data interpolation algorithm */
+
+	// Create an incrementer for the geometry vertices, which 
+	// will be a one dimensional array
+	var vindex = 0; 
+
+	var cachedEle = 0;
+	// Loop from minLat->maxLat, incrementing by precision
+	var minLat = Number(inData.minLat.toFixed(decPlaces));
+	var maxLat = Number(inData.maxLat.toFixed(decPlaces));
+	var minLon = Number(inData.minLon.toFixed(decPlaces));
+	var maxLon = Number(inData.maxLon.toFixed(decPlaces));
+
+	
+	for (var lat = minLat; lat <= maxLat; lat += precision) {
+		// Loop from minLon->maxLon, incrementing by precision
+		for (var lon = minLon; lon <= maxLon; lon += precision) {
+			if (typeof inData['nodes'][lat] != 'undefined'){
+				if (typeof inData['nodes'][lat][lon] != 'undefined'){
+					cachedEle = inData['nodes'][lat][lon];
+				}
+			}
+			// Add a new entry to data for that point
+			geometry.vertices[vindex].x = lat;
+			geometry.vertices[vindex].y = lon;
+			geometry.vertices[vindex].z = cachedEle;
+			vindex++;
+		}
+	}
+
+	console.log(geometry);
+}
+
+function dataMiddle(inData){
+	var midLat = (inData.maxLat + inData.minLat)/2;
+	var midLon = (inData.maxLon + inData.minLon)/2;
+	var midEle = (inData.maxEle + inData.minEle)/2;
+	return new THREE.Vector3(midLat,midLon,midEle);
+}
+
+function updateWorldDimensions(inData){
+	worldWidth = Math.abs(inData.maxLat - inData.minLat);
+	worldDepth = Math.abs(inData.maxLon - inData.minLon);
+	worldHalfWidth = worldWidth/2;
+	worldHalfDepth = worldDepth/2;
+}
+
+function populateSRTMData(data){
+	SRTMData = data;
+
+	updateWorldDimensions(SRTMData)
+}
+
+function animate() {
+
+	requestAnimationFrame( animate );
+
+	render();
+
+}
+
+function render() {
+
+	controls.update( clock.getDelta() );
+	renderer.render( scene, camera );
+
+}
