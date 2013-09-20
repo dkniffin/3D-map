@@ -13,8 +13,9 @@
 	<script src="lib/js/firstPersonControls.js"></script>
 	<script src="lib/js/OrbitControls.js"></script>
 	<script src="lib/js/improvedNoise.js"></script>
+	<script src="lib/js/stats.min.js"></script>
 
-	<script src="lib/js/main.js"></script>
+	<script src="lib/js/main2.js"></script>
 
 	
 
@@ -24,12 +25,12 @@
 <div id="mapContainer"><br /><br /><br /><br /><br />Generating world...</div>
 
 <script>
-	$.post('lib/ajax/topoData.php', function(data) {
-	//$.getJSON('data/srtm-boulder.json', function(data) {
+	//$.post('lib/ajax/topoData.php', function(data) {
+	$.getJSON('data/srtm-boulder.json', function(data) {
 		populateSRTMData(data);
 
 		init();
-		//animate();
+		animate();
 	});
 </script>
 
