@@ -17,21 +17,39 @@
 
 	<script src="lib/js/main.js"></script>
 
-	
-
-
 </head>
 <body>
 <div id="mapContainer"><br /><br /><br /><br /><br />Generating world...</div>
 
 <script>
-	//$.post('lib/ajax/topoData.php', function(data) {
+	// Get the data from a local JSON file
 	$.getJSON('data/srtm-boulder.json', function(data) {
 		populateSRTMData(data);
 
 		init();
 		animate();
 	});
+
+	/* Example API usage:
+  				 			(Working title)
+  	var osmw = $('#container').OSMWorld({
+	  	render: {
+	  		roads: true,
+	  		buildings: true,
+	  		trees: true,
+	  		water: true
+	  		// Other groups of features
+	  	},
+	  	time-lighting: true, // Render lighting based on time in location
+		weather: true, // Render weather for the location
+		weather-api: 'http://blah.org', // API url for weather service
+		
+	  });
+
+	  osmw.addTerrainData(terrainData);
+	  osmw.addOSMData(osmData);
+	  */
+
 </script>
 
 </body>
