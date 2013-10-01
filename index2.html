@@ -1,0 +1,49 @@
+<html>
+<head>
+	<style>
+		canvas { 
+			width: 100%; 
+			height: 100%;
+			/*background-color: black;*/
+		}
+	</style>
+	<script src="lib/js/jquery-1.9.1.min.js"></script>
+	<script src="lib/js/three.min.js"></script>
+	
+	<script src="lib/js/firstPersonControls.js"></script>
+	<script src="lib/js/OrbitControls.js"></script>
+	<script src="lib/js/stats.min.js"></script>
+
+	<!-- Berries -->
+	<script src="lib/js/berries/dist/berries-src.js"></script>
+
+</head>
+<body>
+<div id="mapContainer"><br /><br /><br /><br /><br />Generating world...</div>
+
+<script>
+	var model;
+	var terrain;
+	var light;
+
+	function animateModel() {
+		window.requestAnimationFrame(animateModel);
+		model._render();
+	}
+
+	$.getJSON('data/srtm-boulder.json', function(data) {
+		model = B.model('mapContainer');
+		terrain = B.terrain(data).addTo(model);
+
+		console.log(model);
+
+		animateModel(model);
+
+		light = B.light(-3750,6000,3000).addTo(model);
+		
+	});
+
+</script>
+
+</body>
+</html>

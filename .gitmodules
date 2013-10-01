@@ -1,0 +1,3 @@
+[submodule "lib/js/berries"]
+	path = lib/js/berries
+	url = https://github.com/oddityoverseer13/Berries.git
