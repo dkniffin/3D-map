@@ -11,44 +11,35 @@
 	<script src="lib/js/three.min.js"></script>
 	
 	<script src="lib/js/firstPersonControls.js"></script>
-	<script src="lib/js/OrbitControls.js"></script>
-	<script src="lib/js/improvedNoise.js"></script>
-	<script src="lib/js/stats.min.js"></script>
 
-	<script src="lib/js/main.js"></script>
+	<!-- Berries -->
+	<script src="lib/js/berries/dist/berries-src.js"></script>
 
 </head>
 <body>
 <div id="mapContainer"><br /><br /><br /><br /><br />Generating world...</div>
 
 <script>
-	// Get the data from a local JSON file
+	var model;
+	var terrain;
+	var light;
+
+	function animateModel() {
+		window.requestAnimationFrame(animateModel);
+		model._render();
+	}
+
 	$.getJSON('data/srtm-boulder.json', function(data) {
-		populateSRTMData(data);
+		model = B.model('mapContainer');
+		terrain = B.terrain(data).addTo(model);
 
-		init();
-		animate();
-	});
+		console.log(model);
 
-	/* Example API usage:
-  				 			(Working title)
-  	var osmw = $('#container').OSMWorld({
-	  	render: {
-	  		roads: true,
-	  		buildings: true,
-	  		trees: true,
-	  		water: true
-	  		// Other groups of features
-	  	},
-	  	time-lighting: true, // Render lighting based on time in location
-		weather: true, // Render weather for the location
-		weather-api: 'http://blah.org', // API url for weather service
+		animateModel(model);
+
+		light = B.light(-3750,6000,3000).addTo(model);
 		
-	  });
-
-	  osmw.addTerrainData(terrainData);
-	  osmw.addOSMData(osmData);
-	  */
+	});
 
 </script>
 
