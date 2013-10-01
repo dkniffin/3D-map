@@ -20,26 +20,44 @@
 <div id="mapContainer"><br /><br /><br /><br /><br />Generating world...</div>
 
 <script>
-	var model;
+	var model = B.model('mapContainer');
 	var terrain;
-	var light;
+	var light = B.light(-3750,6000,3000).addTo(model);
+
+	var thingsToDo = 0;
 
 	function animateModel() {
 		window.requestAnimationFrame(animateModel);
 		model._render();
 	}
 
+	console.debug('Getting SRTM Data...');
+	thingsToDo++;
 	$.getJSON('data/srtm-boulder.json', function(data) {
-		model = B.model('mapContainer');
+		console.debug('Finished getting SRTM Data.');
 		terrain = B.terrain(data).addTo(model);
-
-		console.log(model);
-
-		animateModel(model);
-
-		light = B.light(-3750,6000,3000).addTo(model);
-		
+		thingsToDo--;
 	});
+
+	console.debug('Getting OSM Data...');
+	thingsToDo++;
+	$.getJSON('data/boulder-osm.json', function(data) {
+		console.debug('Finished getting OSM Data.');
+		var osmDataC = B.osmdata(data.osm);
+		thingsToDo--;
+	});
+
+
+	// Keep checking if everything is done, 
+	// and when it is, start animating.
+	var timerId = window.setInterval(function(){
+		if (thingsToDo == 0) {
+			animateModel(model);
+			console.debug('Started Animating');
+			clearInterval(timerId);
+		}
+	},1000);
+	
 
 </script>
 
