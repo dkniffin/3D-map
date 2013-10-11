@@ -8,18 +8,21 @@
 		}
 	</style>
 	<script src="lib/js/jquery-1.9.1.min.js"></script>
-	<script src="lib/js/three.min.js"></script>
+	<script src="lib/js/three.js"></script>
 	
-	<script src="lib/js/firstPersonControls.js"></script>
+	<!--<script src="lib/js/firstPersonControls.js"></script>-->
+	<script src="lib/js/berries/src/control/TrackballControls.js"></script>
 
 	<!-- Berries -->
 	<script src="lib/js/berries/dist/berries-src.js"></script>
 
 </head>
 <body>
-<div id="mapContainer"><br /><br /><br /><br /><br />Generating world...</div>
+<div id="logContainer"></div>
+<div id="mapContainer"></div>
 
 <script>
+	var logger = B.logger('logContainer');
 	var model = B.model('mapContainer');
 	var terrain;
 	var light = B.light(-3750,6000,3000).addTo(model);
@@ -31,29 +34,36 @@
 		model._render();
 	}
 
-	console.debug('Getting SRTM Data...');
+	logger.log('Getting SRTM Data...');
 	thingsToDo++;
 	$.getJSON('data/srtm-boulder.json', function(data) {
-		console.debug('Finished getting SRTM Data.');
+		logger.log('Finished getting SRTM Data.');
+		logger.log('Using SRTM Data to create terrain...');
 		terrain = B.terrain(data).addTo(model);
+		logger.log('Done creating terrain.');
 		thingsToDo--;
 	});
 
-	console.debug('Getting OSM Data...');
+	logger.log('Getting OSM Data...');
 	thingsToDo++;
-	$.getJSON('data/boulder-osm.json', function(data) {
-		console.debug('Finished getting OSM Data.');
-		var osmDataC = B.osmdata(data.osm);
+	var osmDataC;
+	$.getJSON('data/cu-osm.json', function(data) {
+		logger.log('Finished getting OSM Data.');
+		osmDataC = B.osmdata(data);
 		thingsToDo--;
 	});
-
 
 	// Keep checking if everything is done, 
 	// and when it is, start animating.
 	var timerId = window.setInterval(function(){
 		if (thingsToDo == 0) {
-			animateModel(model);
-			console.debug('Started Animating');
+
+			osmDataC.addTo(model);
+
+			//animateModel(model);
+			model._startAnimation();
+			logger.log('Started Animating');
+			logger.hide();
 			clearInterval(timerId);
 		}
 	},1000);
