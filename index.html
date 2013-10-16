@@ -47,7 +47,7 @@
 	logger.log('Getting OSM Data...');
 	thingsToDo++;
 	var osmDataC;
-	$.getJSON('data/cu-osm.json', function(data) {
+	$.getJSON('data/boulder-osm.json', function(data) {
 		logger.log('Finished getting OSM Data.');
 		osmDataC = B.osmdata(data);
 		thingsToDo--;
@@ -62,6 +62,7 @@
 
 			//animateModel(model);
 			model._startAnimation();
+			console.log(model._scene);
 			logger.log('Started Animating');
 			logger.hide();
 			clearInterval(timerId);
