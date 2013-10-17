@@ -13,6 +13,7 @@
 	<!--<script src="lib/js/OBJLoader.js"></script>-->
 	<script src="lib/js/ColladaLoader.js"></script>
 
+
 	<!-- Berries -->
 	<script src="lib/js/berries/dist/berries-src.js"></script>
 
@@ -26,6 +27,7 @@
 	var model = B.model('mapContainer');
 	var terrain;
 	//var light = B.light(-3750,6000,3000).addTo(model);
+
 
 	var thingsToDo = 0;
 
@@ -48,6 +50,7 @@
 	thingsToDo++;
 	var osmDataC;
 	$.getJSON('data/boulder-osm.json', function(data) {
+
 		logger.log('Finished getting OSM Data.');
 		osmDataC = B.osmdata(data);
 		thingsToDo--;
@@ -63,6 +66,7 @@
 			//animateModel(model);
 			model._startAnimation();
 			console.log(model._scene);
+
 			logger.log('Started Animating');
 			logger.hide();
 			clearInterval(timerId);
