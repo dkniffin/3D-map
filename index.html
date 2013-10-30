@@ -36,16 +36,24 @@
 		model._render();
 	}
 
-	logger.log('Getting SRTM Data...');
 	thingsToDo++;
-	$.getJSON('data/srtm-boulder.json', function(data) {
-		logger.log('Finished getting SRTM Data.');
-		logger.log('Using SRTM Data to create terrain...');
-		terrain = B.terrain(data).addTo(model);
-		logger.log('Done creating terrain.');
-		thingsToDo--;
-	});
-
+	logger.log('Getting SRTM Data...');
+	var xhr = new XMLHttpRequest();
+	xhr.responseType = 'arraybuffer';
+	xhr.open('GET', 'data/boulder_plus.bin', true);
+	xhr.onload = function(evt) {    
+		if (xhr.response) {
+			data = new Uint16Array(xhr.response);
+			logger.log('Using SRTM Data to create terrain...');
+			terrain = B.terrain(data,
+				new B.LatLngBounds([[39.0,-106.0],[41.0,-105.0]])
+				).addTo(model);
+			logger.log('Done creating terrain.');
+			thingsToDo--;
+		}
+	};  
+  	xhr.send(null);
+	
 	logger.log('Getting OSM Data...');
 	thingsToDo++;
 	var osmDataC;
@@ -56,6 +64,7 @@
 		thingsToDo--;
 	});
 
+
 	// Keep checking if everything is done, 
 	// and when it is, start animating.
 	var timerId = window.setInterval(function(){
@@ -63,7 +72,6 @@
 
 			osmDataC.addTo(model);
 
-			//animateModel(model);
 			model._startAnimation();
 			console.log(model._scene);
 

@@ -4,8 +4,104 @@
 		"selected_items":
 		[
 			[
-				"grid",
-				"gridApproximationBoxes"
+				"building",
+				"buildingGeometry"
+			],
+			[
+				"Thr",
+				"THREE.Geometry"
+			],
+			[
+				"buildin",
+				"buildingGeometry"
+			],
+			[
+				"Face",
+				"THREE.Face4"
+			],
+			[
+				"Geom",
+				"THREE.GeometryUtils"
+			],
+			[
+				"_",
+				"_height"
+			],
+			[
+				"Vector",
+				"THREE.Vector3"
+			],
+			[
+				"_no",
+				"_normalizedNodes"
+			],
+			[
+				"Vect",
+				"THREE.Vector3"
+			],
+			[
+				"maxZoom",
+				"maxZoomOutHeight"
+			],
+			[
+				"ROTATE",
+				"ROTATECW"
+			],
+			[
+				"largePl",
+				"largePlaneMesh"
+			],
+			[
+				"largePlane",
+				"largePlaneGeometry"
+			],
+			[
+				"out",
+				"outfile"
+			],
+			[
+				"_num",
+				"_numWGPHalf"
+			],
+			[
+				"look",
+				"lookupXfloor"
+			],
+			[
+				"lookup",
+				"lookupYfloor"
+			],
+			[
+				"_lo",
+				"_gridHeightLookup"
+			],
+			[
+				"_lookup",
+				"_lookupOffset"
+			],
+			[
+				"_nu",
+				"_numWidthGridPts"
+			],
+			[
+				"_numW",
+				"_numWidthGridPts"
+			],
+			[
+				"_loop",
+				"_lookupSpacing"
+			],
+			[
+				"_loo",
+				"_lookupSpacing"
+			],
+			[
+				"_look",
+				"_lookupOffset"
+			],
+			[
+				"_g",
+				"_gridHeightLookup"
 			],
 			[
 				"vie",
@@ -72,6 +168,10 @@
 				"latlon2meters"
 			],
 			[
+				"grid",
+				"gridSpace"
+			],
+			[
 				"origin",
 				"originXInMeters"
 			],
@@ -92,10 +192,10 @@
 	"buffers":
 	[
 	],
-	"build_system": "Packages/User/jake-build.sublime-build",
+	"build_system": "Packages/User/jake.sublime-build",
 	"command_palette":
 	{
-		"height": 58.0,
+		"height": 72.0,
 		"selected_items":
 		[
 			[
@@ -111,7 +211,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 416.0
+		"width": 503.0
 	},
 	"console":
 	{
@@ -132,17 +232,46 @@
 	},
 	"file_history":
 	[
-		"/C/Users/Derek/Dropbox/School - Derek/Computer Graphics/project/lib/js/berries/build/deps.js",
-		"/C/Users/Derek/Dropbox/School - Derek/Computer Graphics/project/lib/js/berries/src/osmDataContainer/OSMDataContainer.js",
-		"/C/Users/Derek/Dropbox/School - Derek/Computer Graphics/project/lib/js/berries/src/model/Model.js",
-		"/C/Users/Derek/Dropbox/School - Derek/Computer Graphics/project/index.html",
-		"/C/Users/Derek/Dropbox/School - Derek/Computer Graphics/project/lib/js/berries/src/objects/Terrain.js",
+		"/home/kniffin/Dropbox/School - Derek/Computer Graphics/project/.gitignore",
+		"/home/kniffin/Dropbox/School - Derek/Computer Graphics/project/lib/js/berries/src/object-sets/BuildingSet.js",
+		"/home/kniffin/Dropbox/School - Derek/Computer Graphics/project/lib/js/berries/src/materials/DefaultMaterials.js",
+		"/home/kniffin/Dropbox/School - Derek/Computer Graphics/project/lib/js/berries/src/materials/Material.js",
+		"/home/kniffin/Dropbox/School - Derek/Computer Graphics/project/lib/js/berries/src/objects/Building.js",
+		"/home/kniffin/Dropbox/School - Derek/Computer Graphics/project/index.html",
+		"/home/kniffin/Dropbox/School - Derek/Computer Graphics/project/lib/js/berries/src/core/Util.js",
+		"/home/kniffin/Dropbox/School - Derek/Computer Graphics/project/lib/js/berries/src/model/Model.js",
+		"/home/kniffin/Dropbox/School - Derek/Computer Graphics/project/lib/js/berries/build/deps.js",
+		"/home/kniffin/Dropbox/School - Derek/Computer Graphics/project/lib/js/berries/src/osmDataContainer/OSMDataContainer.js",
+		"/home/kniffin/Dropbox/School - Derek/Computer Graphics/project/lib/js/berries/src/objects/FireHydrant.js",
+		"/home/kniffin/Dropbox/School - Derek/Computer Graphics/project/lib/js/berries/dist/dae/fire_hydrant.dae",
+		"/home/kniffin/Dropbox/School - Derek/Computer Graphics/project/lib/js/ColladaLoader.js",
+		"/home/kniffin/Dropbox/School - Derek/Computer Graphics/project/lib/js/berries/src/objects/Building",
+		"/home/kniffin/Dropbox/School - Derek/Computer Graphics/project/lib/js/berries/src/dom/DomUtil.js",
+		"/home/kniffin/Dropbox/School - Derek/Computer Graphics/project/lib/js/berries/src/object-sets/ObjectSet.js",
+		"/home/kniffin/Dropbox/School - Derek/Computer Graphics/project/lib/js/berries/src/objects/Terrain.js",
+		"/home/kniffin/Dropbox/School - Derek/Computer Graphics/project/lib/js/berries/src/objects/Road.js",
+		"/home/kniffin/Dropbox/School - Derek/Computer Graphics/project/lib/js/berries/src/object-sets/RoadSet.js",
+		"/home/kniffin/Dropbox/School - Derek/Computer Graphics/project/lib/js/berries/src/object-sets/GeometrySet.js",
+		"/home/kniffin/Dropbox/School - Derek/Computer Graphics/project/lib/js/berries/src/dom/DomEvent.js",
+		"/home/kniffin/Dropbox/School - Derek/Computer Graphics/project/lib/js/berries/src/control/DefaultControl.js",
+		"/home/kniffin/Dropbox/School - Derek/Computer Graphics/project/lib/js/berries/src/core/Logger.js",
+		"/home/kniffin/Dropbox/School - Derek/Computer Graphics/project/lib/js/berries/src/logger/Logger.js",
+		"/home/kniffin/Dropbox/School - Derek/Computer Graphics/project/lib/js/berries/src/control/TrackballControls.js",
+		"/home/kniffin/.config/sublime-text-3/Packages/User/jake.sublime-build",
+		"/home/kniffin/Dropbox/School - Derek/Computer Graphics/project/data/cu-osm.json",
+		"/home/kniffin/Dropbox/School - Derek/Computer Graphics/project/data/cu.osm",
+		"/home/kniffin/Dropbox/School - Derek/Computer Graphics/project/lib/js/berries/src/core/Util",
+		"/home/kniffin/Dropbox/School - Derek/Computer Graphics/project/data/cu.json",
+		"/home/kniffin/Dropbox/School - Derek/Computer Graphics/project/lib/js/berries/example-osm-data.json",
+		"/home/kniffin/Dropbox/School - Derek/Computer Graphics/project/lib/js/berries/bin/osm2json.rb",
+		"/home/kniffin/Dropbox/School - Derek/Computer Graphics/project/lib/js/berries/bin/osm2json.py",
 		"/C/Users/Derek/AppData/Roaming/Sublime Text 3/Packages/User/jake-build.sublime-build",
 		"/C/Users/Derek/Dropbox/School - Derek/Computer Graphics/project/project.sublime-project",
 		"/C/Users/Derek/AppData/Roaming/Sublime Text 3/Packages/SublimeOnSaveBuild/SublimeOnSaveBuild.sublime-settings",
 		"/C/Users/Derek/Dropbox/School - Derek/Computer Graphics/Assignment 4/lib/js/glMatrix-0.9.5.min.js",
 		"/C/Users/Derek/Dropbox/School - Derek/Computer Graphics/Assignment 4/index.html",
 		"/C/Users/Derek/Downloads/leaflet-src.js",
+		"/C/Users/Derek/Dropbox/School - Derek/Computer Graphics/project/index.html",
 		"/C/Users/Derek/Dropbox/School - Derek/Computer Graphics/project/lib/js/berries/terrain.js",
 		"/C/Users/Derek/Dropbox/School - Derek/Computer Graphics/project/lib/js/main.js",
 		"/C/Users/Derek/Dropbox/School - Derek/Computer Graphics/project/index2.html",
@@ -202,7 +331,26 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"colladaUnit",
+			"unit",
+			"addTo",
+			"light",
+			"color",
+			"texture",
+			"0000ff",
+			"handler",
+			"context",
+			"dispatchEvent",
+			"changeEvent",
+			"addEvent",
+			"B",
+			"emptyImageUrl",
 			"console",
+			"520743421",
+			"xm",
+			"_latlon2",
+			"origin",
+			"customRo",
 			"L",
 			"map",
 			"L",
@@ -264,7 +412,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 21.0
+		"height": 34.0
 	},
 	"input":
 	{
@@ -295,12 +443,12 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 194.0
+		"height": 311.0
 	},
 	"project": "project.sublime-project",
 	"replace":
 	{
-		"height": 38.0
+		"height": 62.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -334,7 +482,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 192.0,
+	"side_bar_width": 343.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
