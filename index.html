@@ -23,6 +23,7 @@
 <div id="mapContainer"></div>
 
 <script>
+$(document).ready(function(){
 	var logger = B.logger('logContainer');
 	var model = B.model('mapContainer');
 	var terrain;
@@ -83,7 +84,7 @@
 			clearInterval(timerId);
 		}
 	},1000);
-	
+});
 
 </script>
 
