@@ -64,13 +64,16 @@
 		thingsToDo--;
 	});
 
+	B.Premades.load(logger);
+
 
 	// Keep checking if everything is done, 
 	// and when it is, start animating.
 	var timerId = window.setInterval(function(){
 		if (thingsToDo == 0) {
 
-			osmDataC.addTo(model);
+			logger.log('Creating objects from OSM data.');
+			osmDataC.addTo(model, logger);
 
 			model._startAnimation();
 			console.log(model._scene);
