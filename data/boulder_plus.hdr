@@ -1,0 +1,15 @@
+ENVI
+description = {
+/home/kniffin/graphics-project/data/boulder_plus.bin}
+samples = 200
+lines   = 400
+bands   = 1
+header offset = 0
+file type = ENVI Standard
+data type = 12
+interleave = bsq
+byte order = 0
+map info = {Geographic Lat/Lon, 1, 1, -106.000138888889, 41.0001388888889, 0.00500138888888889, 0.00500069444444444,WGS-84}
+coordinate system string = {GEOGCS["GCS_WGS_1984",DATUM["D_WGS_1984",SPHEROID["WGS_1984",6378137,298.257223563]],PRIMEM["Greenwich",0],UNIT["Degree",0.017453292519943295]]}
+band names = {
+Band 1}
